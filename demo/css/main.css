@@ -99,6 +99,9 @@ h1 {
 h2 {
     margin-top: 1em;
 }
+h3 {
+    margin-top: 0.6em;
+}
 .general-buttons{
     width: 100%;
     float: left;

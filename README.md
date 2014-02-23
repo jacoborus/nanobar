@@ -1,16 +1,23 @@
 nanobar
 =======
 
-Very very lighweight progress bars
+Very very lighweight progress bars (~725bytes gzipped). No jQuery needed.
+
+## Demo
+
+See [nanobar.micronube.com](http://nanobar.micronube.com)
 
 ## Installation
 
-Download and extract the last release from [here](https://github.com/jacoborus/nanobar/archive/master.zip) or install with Bower
+Download and extract the last release from [here](https://github.com/jacoborus/nanobar/archive/master.zip) or install with [Bower](http://bower.io/)
+
 ```
 $ bower install nanobar
 ```
 
 ## Usage
+
+### Load
 
 Link `nanobar.js` from your html file
 
