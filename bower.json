@@ -1,0 +1,24 @@
+{
+  "name": "nanobar",
+  "version": "0.0.1",
+  "description": "Very lightweight progress bars",
+  "main": "nanobar.js",
+  "keywords": [
+    "loader",
+    "progress",
+    "progressbar",
+    "CSS3",
+    "html"
+  ],
+  "author": [
+    "Jacobo Tabernero jacobo@xarope.eu"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
