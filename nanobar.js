@@ -1,9 +1,11 @@
+'use strict';
+
 var Nanobar = function (options) {
-	var createStyle, addCss, style, n, animation;
+
+	var addCss, style, n, animation;
 	n = this;
 	var opts = options || {};
 	opts.bg = opts.bg || '#000';
-
 
 	// Generate css style element
 	style = '.nanobarbar{width:0;height:100%;float:left;}' +
@@ -16,7 +18,7 @@ var Nanobar = function (options) {
 	addCss = function (css) {
 		var s = document.getElementById( 'nanobar-style' );
 
-		if (s == null) {
+		if (s === null) {
 			s = document.createElement( 'style' );
 			s.setAttribute( 'type', 'text/css' );
 			s.setAttribute( 'id', 'nanobar-style');
@@ -27,10 +29,7 @@ var Nanobar = function (options) {
 				s.appendChild( document.createTextNode( css ));
 			}
 		}
-	}
-
-	// append style
-	addCss( style );
+	};
 
 	// crossbrowser transition animation
 	animation = function (){
@@ -41,14 +40,17 @@ var Nanobar = function (options) {
 			'OTransition':'oTransitionEnd',
 			'MozTransition':'transitionend',
 			'WebkitTransition':'webkitTransitionEnd'
-		}
+		};
 
 		for(t in transitions){
 			if( el.style[t] !== undefined ){
 				return transitions[t];
 			}
 		}
-	}
+	};
+
+	// append style
+	addCss( style );
 
 
 	// create progress container
@@ -83,18 +85,20 @@ var Nanobar = function (options) {
 			n.finish();
 		}
 	});
-	this.init();
+	return this.init();
 };
 
+
 Nanobar.prototype.init = function () {
-	this.bar.className = "nanobarbar";
+	this.bar.className = 'nanobarbar';
 	this.bar.style.height = '100%';
 	this.bar.style.width = 0;
 	var n = this;
 	setTimeout( function (){
-		n.bar.className = "nanobarbar active";
+		n.bar.className = 'nanobarbar active';
 	}, 1);
 };
+
 
 Nanobar.prototype.finish = function () {
 	var n = this;
@@ -104,9 +108,11 @@ Nanobar.prototype.finish = function () {
 	}, 300);
 };
 
+
 Nanobar.prototype.go = function (p) {
 	this.bar.style.width = p + '%';
 };
+
 
 // Expose module if needed
 if (typeof module === 'object' && module.exports && module.exports._builtinLibs){

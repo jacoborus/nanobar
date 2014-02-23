@@ -96,6 +96,9 @@ h1 {
     margin-top: 3em;
     font-weight: normal;
 }
+h2 {
+    margin-top: 1em;
+}
 .general-buttons{
     width: 100%;
     float: left;
