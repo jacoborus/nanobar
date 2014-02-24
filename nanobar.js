@@ -1,7 +1,6 @@
-'use strict';
-
+/* http://nanobar.micronube.com/  ||  https://github.com/jacoborus/nanobar/    MIT LICENSE */
 var Nanobar = function (options) {
-
+	'use strict';
 	var addCss, style, n, animation;
 	n = this;
 	var opts = options || {};
