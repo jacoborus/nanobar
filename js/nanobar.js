@@ -112,9 +112,3 @@ Nanobar.prototype.finish = function () {
 Nanobar.prototype.go = function (p) {
 	this.bar.style.width = p + '%';
 };
-
-
-// Expose module if needed
-if (typeof module === 'object' && module.exports && module.exports._builtinLibs){
-	module.exports = Nanobar;
-}
