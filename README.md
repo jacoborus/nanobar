@@ -30,7 +30,7 @@ Link `nanobar.js` from your html file
 or require it with [Browserify](http://browserify.org/):
 
 ```js
-var Nanobar = require('path/to/nanobar.js')
+var Nanobar = require('path/to/nanobar')
 ```
 
 ### Generate progressbar
@@ -61,7 +61,7 @@ Create bar
 
 ```js
 var options = {
-	background: '#acf',
+	bg: '#acf',
 	// left target blank for global nanobar
 	target: document.getElementById('myDivId'),
 	// id for new nanobar

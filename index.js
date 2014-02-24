@@ -112,3 +112,6 @@ Nanobar.prototype.finish = function () {
 Nanobar.prototype.go = function (p) {
 	this.bar.style.width = p + '%';
 };
+
+
+module.exports = Nanobar;
