@@ -66,7 +66,7 @@ body {
 }
 a{
     color: #000;
-    font-weight: bold;
+    font-weight: normal;
     border-bottom: 2px dotted #000;
     text-decoration: none;
     transition: all 0.5s;
