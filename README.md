@@ -11,11 +11,20 @@ See [nanobar.micronube.com](http://nanobar.micronube.com)
 
 ## Installation
 
-Download and extract the last release from [here](https://github.com/jacoborus/nanobar/archive/master.zip) or install with [Bower](http://bower.io/)
+Download and extract the last release from [here](https://github.com/jacoborus/nanobar/archive/master.zip) or install with package manager:
+
+[Bower](http://bower.io/):
 
 ```
 $ bower install nanobar
 ```
+
+[npm](https://www.npmjs.org/package/nanobar):
+
+```
+$ npm install nanobar
+```
+
 
 ## Usage
 
@@ -41,8 +50,8 @@ var nanobar = new Nanobar( options );
 
 **options**
 
-- `bg` `<String>`: background css property, '#000' by default
-- `id` `<String>`: id for **nanobar** div
+- `bg` `<String>`: (optional) background css property, '#000' by default
+- `id` `<String>`: (optional) id for **nanobar** div
 - `target` `<DOM Element>`: (optional) Where to put the progress bar, **nanobar** will be fixed to top of document if `target` is `null`
 
 
