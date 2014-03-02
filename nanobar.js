@@ -3,8 +3,7 @@ var Nanobar = function (options) {
 	'use strict';
 	var addCss, style, n, animation;
 	n = this;
-	var opts = options || {};
-	opts.bg = opts.bg || '#000';
+	var opts = options || {bg: '#000'};
 
 	// Generate css style element
 	style = '.nanobarbar{width:0;height:100%;float:left;}' +
@@ -95,13 +94,13 @@ Nanobar.prototype.init = function () {
 	var n = this;
 	setTimeout( function (){
 		n.bar.className = 'nanobarbar active';
-	}, 1);
+	}, 300);
 };
 
 
 Nanobar.prototype.finish = function () {
 	var n = this;
-	this.bar.style.height = 0 ;
+	this.bar.style.height = 0;
 	setTimeout( function (){
 		n.init();
 	}, 300);
