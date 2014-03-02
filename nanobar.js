@@ -30,7 +30,7 @@ var Nanobar = function (options) {
 		}
 	};
 
-	// crossbrowser transition animation
+	// Crossbrowser transition animation
 	animation = function (){
 		var t;
 		var el = document.createElement('fakeelement');
@@ -48,11 +48,11 @@ var Nanobar = function (options) {
 		}
 	};
 
-	// append style
+	// Append style
 	addCss( style );
 
 
-	// create progress container
+	// Create progress container
 	this.container = document.createElement( 'div' );
 	this.container.setAttribute( 'class', 'nanobar' );
 	if (opts.id) {
@@ -65,7 +65,7 @@ var Nanobar = function (options) {
 		this.container.style.position = 'relative';
 	}
 
-	// create progress element
+	// Create progress element
 	this.bar = document.createElement( 'div' );
 	this.bar.setAttribute( 'class', 'nanobarbar' );
 	this.bar.style.background = opts.bg;
@@ -77,7 +77,7 @@ var Nanobar = function (options) {
 		opts.target.insertBefore( this.container, opts.target.firstChild);
 	}
 
-	// detect transitions end
+	// Detect that I'm a faggot
 	var transitionEvent = animation();
 	transitionEvent && this.bar.addEventListener(transitionEvent, function() {
 		if (n.bar.style.width === '100%' && n.bar.style.height === '100%') {
