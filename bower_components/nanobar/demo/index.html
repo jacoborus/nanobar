@@ -11,7 +11,6 @@
 		<link rel="stylesheet" href="css/normalize.min.css">
 		<style>#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial, sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;z-index:9999999999;border:none;}#forkongithub a:hover{background:#fff;color:#000;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;left:0;width:200px;overflow:hidden;height:200px;}#forkongithub a{width:200px;position:absolute;top:60px;left:-60px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style>
 		<link rel="stylesheet" href="css/main.css">
-		<link rel="shortcut icon" href="nanobar.ico?v=2" />
 
 		<!--[if lt IE 9]>
 			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,7 +23,7 @@
 
 		<div class="container">
 			<h1 id="nanobar">nanobar.js</h1>
-			<p class="center">Very very lightweight progress bars (~730 bytes gzipped).<br/>No jQuery required.</p>
+			<p class="center">Very very lightweight progress bars (~730 bytes gzipped).<br/>No jQuery needed.</p>
 			<p class="center"><small>For iE8+ and the rest of the world</small></p>
 
 			<div class="general-buttons">
@@ -52,50 +51,6 @@ nanobar.go( 30 ); // size bar 30%
 
 // Finish progress bar
 nanobar.go(100);</code></pre>
-			<h2 id="installation">Installation</h2>
-
-			<p>Download and extract the last release from <a href="https://github.com/jacoborus/nanobar/archive/master.zip">here</a> or install with package manager:</p>
-
-			<p><a href="http://bower.io/">Bower</a>:</p>
-
-			<pre><code>$ bower install nanobar</code></pre>
-
-			<p><a href="https//www.npmjs.org/">npm</a>:</p>
-
-			<pre><code>$ npm install nanobar</code></pre>
-
-			<h2 id="usage">Usage</h2>
-
-			<p>Link <code>nanobar.js</code> from your html file</p>
-
-			<pre><code>&lt;script src="path/to/nanobar.js"&gt;&lt;/script&gt;</code></pre>
-
-			<p>or require it with <a href="http://browserify.org/">Browserify</a>:</p>
-
-			<pre><code>var Nanobar = require('path/to/nanobar')</code></pre>
-
-			<h3 id="generate-progressbar">Generate progressbar</h3>
-
-			<pre><code>var nanobar = new Nanobar( options );</code></pre>
-
-			<p><strong>options</strong></p>
-
-			<ul>
-			<li><code>bg</code> <code>&lt;String&gt;</code>: background css property, ‘#000’ by default</li>
-			<li><code>id</code> <code>&lt;String&gt;</code>: id for <strong>nanobar</strong> div</li>
-			<li><code>target</code> <code>&lt;DOM Element&gt;</code>: (optional) Where to put the progress bar, <strong>nanobar</strong> will be fixed to top of document if <code>target</code> is <code>null</code></li>
-			</ul>
-
-			<h3 id="move-bar">Move bar</h3>
-
-			<p>Resize the bar with <code>nanobar.go(percentage)</code></p>
-
-			<p><strong>arguments</strong></p>
-
-			<ul>
-			<li><code>percentage</code> <code>&lt;Number&gt;</code> : percentage width of nanobar</li>
-			</ul>
-
 
 			<p><br><br></p>
 
@@ -104,19 +59,7 @@ nanobar.go(100);</code></pre>
 			<p>© 2014 <a href="https://github.com/jacoborus">jacoborus</a> - <a href="https://raw.github.com/jacoborus/nanobar/master/LICENSE">MIT License</a></p>
 		</div>
 
-		<script src="bower_components/nanobar/nanobar.min.js"></script>
+		<script src="../nanobar.min.js"></script>
 		<script src="js/main.js"></script>
-		<script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-48282158-1']);
-			_gaq.push(['_trackPageview']);
-			(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; 
-
-			ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
 	</body>
 </html>
