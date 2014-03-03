@@ -1,46 +1,41 @@
-'use strict';
+/* http://nanobar.micronube.com/  ||  https://github.com/jacoborus/nanobar/    MIT LICENSE */
+var Nanobar = (function () {
 
-var Nanobar = function (options) {
-
-	var addCss, style, n, animation;
-	n = this;
-	var opts = options || {};
-	opts.bg = opts.bg || '#000';
-
-	// Generate css style element
-	style = '.nanobarbar{width:0;height:100%;float:left;}' +
-			'.nanobarbar.active{transition: all 0.3s;}' +
-			'.goOut{margin-top:-4px;opacity:0}' +
-			'.nanobar{float:left;width:100%;height:4px;z-index:9999;}';
+	'use strict';
+	var addCss, animation, transEvent, createBar, Nanobar,
+		css = '.nanobar{float:left;width:100%;height:4px;z-index:9999;}.nanobarbar{width:0;height:100%;float:left;transition:all .3s;}',
+		head = document.head || document.getElementsByTagName( 'head' )[0];
 
 
-	// Create style element in document
-	addCss = function (css) {
+	// Create and insert style element in head if not exists
+	addCss = function () {
 		var s = document.getElementById( 'nanobar-style' );
 
 		if (s === null) {
 			s = document.createElement( 'style' );
-			s.setAttribute( 'type', 'text/css' );
-			s.setAttribute( 'id', 'nanobar-style');
-			document.getElementsByTagName( 'head' )[0].appendChild( s );
+			s.type = 'text/css';
+			s.id = 'nanobar-style';
+
+			head.insertBefore(s, head.firstChild);
+
 			if (s.styleSheet) {   // IE
 				s.styleSheet.cssText = css;
 			} else {              // the world
 				s.appendChild( document.createTextNode( css ));
 			}
 		}
-	};
+	}
+
 
 	// crossbrowser transition animation
 	animation = function (){
-		var t;
-		var el = document.createElement('fakeelement');
-		var transitions = {
+		var el = document.createElement('fakeelement'),
+			transitions = {
 			'transition':'transitionend',
 			'OTransition':'oTransitionEnd',
 			'MozTransition':'transitionend',
 			'WebkitTransition':'webkitTransitionEnd'
-		};
+		}, t;
 
 		for(t in transitions){
 			if( el.style[t] !== undefined ){
@@ -49,69 +44,97 @@ var Nanobar = function (options) {
 		}
 	};
 
-	// append style
-	addCss( style );
+	// get specific browser animation transition
+	transEvent = animation();
 
 
-	// create progress container
-	this.container = document.createElement( 'div' );
-	this.container.setAttribute( 'class', 'nanobar' );
-	if (opts.id) {
-		this.container.setAttribute( 'id', opts.id );
+
+	createBar = function ( cont ) {
+		// create progress element
+		var bar = document.createElement( 'div' );
+		bar.setAttribute( 'class', 'nanobarbar' );
+		bar.style.background = cont.opts.bg;
+		bar.setAttribute( 'on' , '1');
+		cont.cont.appendChild( bar );
+
+
+		// detect transitions ends
+		transEvent && bar.addEventListener( transEvent, function() {
+			if (bar.style.width === '100%' && bar.getAttribute( 'on' ) === '1' ) {
+				bar.setAttribute( 'on' , 0);
+
+				// remove bar from array list
+				cont.bars.pop();
+
+				// reduce bar and remove DOM element with delay
+				bar.style.height = 0;
+				setTimeout( function () {
+					cont.cont.removeChild( bar );
+				}, 300);
+			}
+		});
+
+		return bar;
 	}
-	if (!opts.target) {
-		this.container.style.position = 'fixed';
-		this.container.style.top = '0';
-	} else {
-		this.container.style.position = 'relative';
-	}
 
-	// create progress element
-	this.bar = document.createElement( 'div' );
-	this.bar.setAttribute( 'class', 'nanobarbar' );
-	this.bar.style.background = opts.bg;
-	this.container.appendChild( this.bar );
 
-	if (!opts.target) {
-		document.getElementsByTagName( 'body' )[0].appendChild( this.container );
-	} else {
-		opts.target.insertBefore( this.container, opts.target.firstChild);
-	}
 
-	// detect transitions end
-	var transitionEvent = animation();
-	transitionEvent && this.bar.addEventListener(transitionEvent, function() {
-		if (n.bar.style.width === '100%' && n.bar.style.height === '100%') {
-			n.finish();
+	Nanobar = function (opt) {
+
+		var opts = this.opts = opt || {},
+			cont;
+
+		// set options
+		opts.bg = opts.bg || '#000';
+		this.bars = [];
+
+		// append style
+		addCss();
+
+		// create bar container
+		cont = this.cont = document.createElement( 'div' );
+		cont.setAttribute( 'class', 'nanobar' );
+		if (opts.id) {
+			cont.id = opts.id;
 		}
-	});
-	return this.init();
-};
+		if (!opts.target) {
+			cont.style.position = 'fixed';
+			cont.style.top = '0';
+		} else {
+			cont.style.position = 'relative';
+		}
+
+		// insert container
+		if (!opts.target) {
+			document.getElementsByTagName( 'body' )[0].appendChild( cont );
+		} else {
+			opts.target.insertBefore( cont, opts.target.firstChild);
+		}
+
+		return this.init();
+	};
 
 
-Nanobar.prototype.init = function () {
-	this.bar.className = 'nanobarbar';
-	this.bar.style.height = '100%';
-	this.bar.style.width = 0;
-	var n = this;
-	setTimeout( function (){
-		n.bar.className = 'nanobarbar active';
-	}, 1);
-};
+
+	Nanobar.prototype.init = function () {
+		// create and insert bar in DOM and this.bars array
+		var bar =  createBar( this );
+		this.bars.unshift( bar);
+	};
 
 
-Nanobar.prototype.finish = function () {
-	var n = this;
-	this.bar.style.height = 0 ;
-	setTimeout( function (){
-		n.init();
-	}, 300);
-};
+	Nanobar.prototype.go = function (p) {
+		// expand bar
+		this.bars[0].style.width = p + '%';
 
+		// create new bar at progress end
+		if (p == 100) {
+			this.init();
+		}
+	};
 
-Nanobar.prototype.go = function (p) {
-	this.bar.style.width = p + '%';
-};
+	return Nanobar;
+})();
 
 
 module.exports = Nanobar;

@@ -90,6 +90,4 @@ nanobar.go(100);
 
 ---
 
-© 2014 [jacoborus](https://github.com/jacoborus)
-
-Released under [MIT License](https://raw.github.com/jacoborus/nanobar/master/LICENSE)
+© 2014 [jacoborus](https://github.com/jacoborus) - Released under [MIT License](https://raw.github.com/jacoborus/nanobar/master/LICENSE)
