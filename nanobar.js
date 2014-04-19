@@ -19,7 +19,7 @@ var Nanobar = (function () {
 		);
 		return v > 4 ? v : undef;
 	}());
-	
+
 	// Create and insert style element in head if not exists
 	addCss = function () {
 		var s = document.getElementById( 'nanobar-style' );
@@ -37,7 +37,7 @@ var Nanobar = (function () {
 				s.appendChild( document.createTextNode( css ));
 			}
 		}
-	}
+	};
 
 
 	// crossbrowser transition animation
@@ -86,9 +86,8 @@ var Nanobar = (function () {
 				}, 300);
 			}
 		});
-
 		return bar;
-	}
+	};
 
 
 
@@ -142,7 +141,7 @@ var Nanobar = (function () {
 
 		// create new bar at progress end
 		if (p == 100) {
-			if(ie != undefined){ //Check if IE version is less than 10. If it is, reset the height to 0.
+			if(ie !== undefined){ //Check if IE version is less than 10. If it is, reset the height to 0.
 				 this.bars[0].style.height = 0;
 			}
 			this.init();

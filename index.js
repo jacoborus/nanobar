@@ -6,6 +6,19 @@ var Nanobar = (function () {
 		css = '.nanobar{float:left;width:100%;height:4px;z-index:9999;}.nanobarbar{width:0;height:100%;float:left;transition:all .3s;}',
 		head = document.head || document.getElementsByTagName( 'head' )[0];
 
+	// Check the version of IE. If IE is 10+ or not IE, it will return undefined. Otherwise it will return the IE version number.
+	var ie = (function(){
+		var undef,
+			v = 3,
+			div = document.createElement('div'),
+			all = div.getElementsByTagName('i');
+
+		while (
+			div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+			all[0]
+		);
+		return v > 4 ? v : undef;
+	}());
 
 	// Create and insert style element in head if not exists
 	addCss = function () {
@@ -24,7 +37,7 @@ var Nanobar = (function () {
 				s.appendChild( document.createTextNode( css ));
 			}
 		}
-	}
+	};
 
 
 	// crossbrowser transition animation
@@ -73,9 +86,8 @@ var Nanobar = (function () {
 				}, 300);
 			}
 		});
-
 		return bar;
-	}
+	};
 
 
 
@@ -129,6 +141,9 @@ var Nanobar = (function () {
 
 		// create new bar at progress end
 		if (p == 100) {
+			if(ie !== undefined){ //Check if IE version is less than 10. If it is, reset the height to 0.
+				 this.bars[0].style.height = 0;
+			}
 			this.init();
 		}
 	};
