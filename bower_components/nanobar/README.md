@@ -1,9 +1,9 @@
 nanobar
 =======
 
-Very very lightweight progress bars (~730 bytes gzipped). No jQuery needed.
+Very very lightweight progress bars (~830 bytes gzipped). No jQuery needed.
 
-Compatibility: iE8+ and the rest of the world
+Compatibility: iE9+ and the rest of the world
 
 ## Demo
 
@@ -71,7 +71,7 @@ Create bar
 ```js
 var options = {
 	bg: '#acf',
-	// left target blank for global nanobar
+	// leave target blank for global nanobar
 	target: document.getElementById('myDivId'),
 	// id for new nanobar
 	id: 'mynano'

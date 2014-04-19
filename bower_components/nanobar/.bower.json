@@ -1,6 +1,6 @@
 {
   "name": "nanobar",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Very lightweight js progress bars",
   "main": "nanobar.js",
   "keywords": [
@@ -25,14 +25,14 @@
     "tests"
   ],
   "homepage": "https://github.com/jacoborus/nanobar",
-  "_release": "0.0.6",
+  "_release": "0.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.6",
-    "commit": "d8e46a5ca07712e9883e3734572c54dc498c9fdd"
+    "tag": "v0.1.0",
+    "commit": "3fbb41118adeede1796678a5ec19f512f9e4e5d4"
   },
   "_source": "git://github.com/jacoborus/nanobar.git",
-  "_target": "~0.0.6",
+  "_target": "~0.1.0",
   "_originalSource": "nanobar",
   "_direct": true
 }
