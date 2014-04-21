@@ -2,149 +2,129 @@
 var Nanobar = (function () {
 
 	'use strict';
-	var addCss, animation, transEvent, createBar, Nanobar,
-		css = '.nanobar{float:left;width:100%;height:4px;z-index:9999;}.nanobarbar{width:0;height:100%;float:left;transition:all .3s;}',
-		head = document.head || document.getElementsByTagName( 'head' )[0];
+	var addCss, Bar, Nanobar, move, place, init,
+		// container styles
+		cssCont = {
+			width: '100%',
+			height: '4px',
+			zIndex: 9999,
+			top : '0'
+		},
+		// bar styles
+		cssBar = {
+			width:0,
+			height: '100%',
+			clear: 'both',
+			transition: 'height .3s'
+		};
 
-	// Check the version of IE. If IE is 10+ or not IE, it will return undefined. Otherwise it will return the IE version number.
-	var ie = (function(){
-		var undef,
-			v = 3,
-			div = document.createElement('div'),
-			all = div.getElementsByTagName('i');
 
-		while (
-			div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-			all[0]
-		);
-		return v > 4 ? v : undef;
-	}());
-
-	// Create and insert style element in head if not exists
-	addCss = function () {
-		var s = document.getElementById( 'nanobar-style' );
-
-		if (s === null) {
-			s = document.createElement( 'style' );
-			s.type = 'text/css';
-			s.id = 'nanobar-style';
-
-			head.insertBefore(s, head.firstChild);
-
-			if (s.styleSheet) {   // IE
-				s.styleSheet.cssText = css;
-			} else {              // the world
-				s.appendChild( document.createTextNode( css ));
-			}
+	// add `css` to `el` element
+	addCss = function (el, css ) {
+		var i;
+		for (i in css) {
+			el.style[i] = css[i];
 		}
+		el.style.float = 'left';
 	};
 
+	// animation loop
+	move = function () {
+		var self = this,
+			dist = this.width - this.here;
 
-	// crossbrowser transition animation
-	animation = function (){
-		var el = document.createElement('fakeelement'),
-			transitions = {
-			'transition':'transitionend',
-			'OTransition':'oTransitionEnd',
-			'MozTransition':'transitionend',
-			'WebkitTransition':'webkitTransitionEnd'
-		}, t;
-
-		for(t in transitions){
-			if( el.style[t] !== undefined ){
-				return transitions[t];
-			}
-		}
-	};
-
-	// get specific browser animation transition
-	transEvent = animation();
-
-
-
-	createBar = function ( cont ) {
-		// create progress element
-		var bar = document.createElement( 'div' );
-		bar.setAttribute( 'class', 'nanobarbar' );
-		bar.style.background = cont.opts.bg;
-		bar.setAttribute( 'on' , '1');
-		cont.cont.appendChild( bar );
-
-
-		// detect transitions ends
-		transEvent && bar.addEventListener( transEvent, function() {
-			if (bar.style.width === '100%' && bar.getAttribute( 'on' ) === '1' ) {
-				bar.setAttribute( 'on' , 0);
-
-				// remove bar from array list
-				cont.bars.pop();
-
-				// reduce bar and remove DOM element with delay
-				bar.style.height = 0;
+		if (dist < 0.1 && dist > -0.1) {
+			place.call( this, this.here );
+			this.moving = false;
+			if (this.width == 100) {
+				this.el.style.height = 0;
 				setTimeout( function () {
-					cont.cont.removeChild( bar );
+					self.cont.el.removeChild( self.el );
 				}, 300);
 			}
-		});
-		return bar;
+		} else {
+			place.call( this, this.width - (dist/4) );
+			setTimeout( function () {
+				self.go();
+			}, 14);
+		}
 	};
 
+	// set bar width
+	place = function (num) {
+		this.width = num;
+		this.el.style.width = this.width + '%';
+	};
+
+	// create and insert bar in DOM and this.bars array
+	init = function () {
+		var bar = new Bar( this );
+		this.bars.unshift( bar );
+	};
+
+	Bar = function ( cont ) {
+		// create progress element
+		this.el = document.createElement( 'div' );
+		this.el.style.backgroundColor = cont.opts.bg;
+		this.width = 0;
+		this.here = 0;
+		this.moving = false;
+		this.cont = cont;
+		addCss( this.el, cssBar);
+		cont.el.appendChild( this.el );
+	};
+
+	Bar.prototype.go = function (num) {
+		if (num) {
+			this.here = num;
+			if (!this.moving) {
+				this.moving = true;
+				move.call( this );
+			}
+		} else if (this.moving) {
+			move.call( this );
+		}
+	};
 
 
 	Nanobar = function (opt) {
 
 		var opts = this.opts = opt || {},
-			cont;
+			el;
 
 		// set options
 		opts.bg = opts.bg || '#000';
 		this.bars = [];
 
-		// append style
-		addCss();
 
 		// create bar container
-		cont = this.cont = document.createElement( 'div' );
-		cont.setAttribute( 'class', 'nanobar' );
+		el = this.el = document.createElement( 'div' );
+		// append style
+		addCss( this.el, cssCont);
 		if (opts.id) {
-			cont.id = opts.id;
+			el.id = opts.id;
 		}
-		if (!opts.target) {
-			cont.style.position = 'fixed';
-			cont.style.top = '0';
-		} else {
-			cont.style.position = 'relative';
-		}
+		// set CSS position
+		el.style.position = !opts.target ? 'fixed' : 'relative';
 
 		// insert container
 		if (!opts.target) {
-			document.getElementsByTagName( 'body' )[0].appendChild( cont );
+			document.getElementsByTagName( 'body' )[0].appendChild( el );
 		} else {
-			opts.target.insertBefore( cont, opts.target.firstChild);
+			opts.target.insertBefore( el, opts.target.firstChild);
 		}
 
-		return this.init();
-	};
-
-
-
-	Nanobar.prototype.init = function () {
-		// create and insert bar in DOM and this.bars array
-		var bar =  createBar( this );
-		this.bars.unshift( bar);
+		init.call( this );
 	};
 
 
 	Nanobar.prototype.go = function (p) {
 		// expand bar
-		this.bars[0].style.width = p + '%';
+		this.bars[0].go( p );
 
 		// create new bar at progress end
 		if (p == 100) {
-			if(ie !== undefined){ //Check if IE version is less than 10. If it is, reset the height to 0.
-				 this.bars[0].style.height = 0;
-			}
-			this.init();
+			init.call( this );
 		}
 	};
 

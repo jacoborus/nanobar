@@ -7,9 +7,7 @@
 		<meta name="description" content="nanobar.js - Very very lightweight progress bars">
 		<meta name="viewport" content="width=device-width">
 		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/normalize.min.css">
-		<style>#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial, sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;z-index:9999999999;border:none;}#forkongithub a:hover{background:#fff;color:#000;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;left:0;width:200px;overflow:hidden;height:200px;}#forkongithub a{width:200px;position:absolute;top:60px;left:-60px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style>
 		<link rel="stylesheet" href="css/main.css">
 
 		<!--[if lt IE 9]>
@@ -19,12 +17,9 @@
 	</head>
 	<body>
 
-		<span id="forkongithub"><a href="https://github.com/jacoborus/nanobar">Fork me on GitHub</a></span>
 
 		<div class="container">
 			<h1 id="nanobar">nanobar.js</h1>
-			<p class="center">Very very lightweight progress bars (~830 bytes gzipped).<br/>No jQuery needed.</p>
-			<p class="center"><small>For iE9+ and the rest of the world</small></p>
 
 			<div class="general-buttons">
 				<button class="doc_go" go="30">nanobar.go(30)</button>
@@ -33,33 +28,13 @@
 			</div>
 
 			<br>
-			<h2>Example</h2>
-			<pre class="full"><code>var options = {
-	bg: '#acf',
-
-	// left target blank for global nanobar
-	target: document.getElementById('myDivId'),
-
-	// id for new nanobar
-	id: 'mynano'
-};
-
-var nanobar = new Nanobar( options );
-
-// move bar
-nanobar.go( 30 ); // size bar 30%
-
-// Finish progress bar
-nanobar.go(100);</code></pre>
-
-			<p><br><br></p>
 
 			<hr>
 
 			<p>© 2014 <a href="https://github.com/jacoborus">jacoborus</a> - <a href="https://raw.github.com/jacoborus/nanobar/master/LICENSE">MIT License</a></p>
 		</div>
 
-		<script src="../nanobar.min.js"></script>
+		<script src="../nanobar.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>
