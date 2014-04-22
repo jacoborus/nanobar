@@ -1,9 +1,9 @@
 nanobar
 =======
 
-Very very lighweight progress bars (~830 bytes gzipped). No jQuery needed.
+Very very lighweight progress bars (~630 bytes gzipped). No jQuery needed.
 
-Compatibility: iE9+ and the rest of the world
+Compatibility: iE7+ and the rest of the world
 
 Check [https://raw.github.com/jacoborus/nanobar](https://raw.github.com/jacoborus/nanobar).
 

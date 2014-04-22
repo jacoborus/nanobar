@@ -1,9 +1,9 @@
 nanobar
 =======
 
-Very very lightweight progress bars (~830 bytes gzipped). No jQuery needed.
+Very very lightweight progress bars (~630 bytes gzipped). No jQuery needed.
 
-Compatibility: iE9+ and the rest of the world
+Compatibility: iE7+ and the rest of the world
 
 ## Demo
 
@@ -32,14 +32,14 @@ $ npm install nanobar
 
 Link `nanobar.js` from your html file
 
-```
-<script src="path/to/nanobar.js"></script>
+```html
+<script src="path/to/nanobar.min.js"></script>
 ```
 
 or require it with [Browserify](http://browserify.org/):
 
 ```js
-var Nanobar = require('path/to/nanobar')
+var Nanobar = require('path/to/nanobar');
 ```
 
 ### Generate progressbar
