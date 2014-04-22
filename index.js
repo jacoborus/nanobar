@@ -46,7 +46,7 @@ var Nanobar = (function () {
 			place.call( this, this.width - (dist/4) );
 			setTimeout( function () {
 				self.go();
-			}, 14);
+			}, 16);
 		}
 	};
 

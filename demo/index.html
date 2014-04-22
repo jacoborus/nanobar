@@ -22,9 +22,9 @@
 			<h1 id="nanobar">nanobar.js</h1>
 
 			<div class="general-buttons">
-				<button class="doc_go" go="30">nanobar.go(30)</button>
-				<button class="doc_go" go="60">nanobar.go(60)</button>
-				<button class="doc_go" go="100">nanobar.go(100)</button>
+				<button class="doc_go" onClick="nanobar.go(30)">nanobar.go(30)</button>
+				<button class="doc_go" onClick="nanobar.go(60)">nanobar.go(60)</button>
+				<button class="doc_go" onClick="nanobar.go(100)">nanobar.go(100)</button>
 			</div>
 
 			<br>
@@ -35,6 +35,9 @@
 		</div>
 
 		<script src="../nanobar.js"></script>
-		<script src="js/main.js"></script>
+		<script>
+			var nanobar = new Nanobar();
+			nanobar.go(50);
+		</script>
 	</body>
 </html>
