@@ -13,6 +13,12 @@ See [nanobar.micronube.com](http://nanobar.micronube.com)
 
 Download and extract the last release from [here](https://github.com/jacoborus/nanobar/archive/master.zip) or install with package manager:
 
+[component(1)](http://component.io):
+
+```
+$ component install jacoborus/nanobar
+```
+
 [Bower](http://bower.io/):
 
 ```
@@ -36,7 +42,7 @@ Link `nanobar.js` from your html file
 <script src="path/to/nanobar.min.js"></script>
 ```
 
-or require it with [Browserify](http://browserify.org/):
+or require it with [Browserify](http://browserify.org/) or [Component](http://component.io):
 
 ```js
 var Nanobar = require('path/to/nanobar');

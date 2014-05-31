@@ -1,7 +1,7 @@
 {
-  "name": "nanobar",
+  "name": "Nanobar",
+  "repo": "jacoborus/nanobar",
   "version": "0.2.0",
-  "main": "index.js",
   "scripts": [
     "index.js"
   ],
@@ -9,7 +9,7 @@
   "authors": [
     "Jacobo Tabernero <jacobo@xarope.eu>"
   ],
-  "description": "Very lightweight js progress bars (for browsers)",
+  "description": "Very lightweight js progress bars. No jQuery",
   "keywords": [
     "progressbar",
     "css3",
