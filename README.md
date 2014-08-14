@@ -1,7 +1,7 @@
-nanobar
-=======
+![nanobar](https://raw.githubusercontent.com/jacoborus/nanobar/master/brand/nanobar.png 'nanobar logo')
+=======================================================================================================
 
-Very very lightweight progress bars (~630 bytes gzipped). No jQuery needed.
+Very lightweight progress bars (~630 bytes gzipped). No jQuery needed.
 
 Compatibility: iE7+ and the rest of the world
 
