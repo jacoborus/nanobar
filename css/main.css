@@ -25,6 +25,16 @@ body {
     text-shadow: none;
 }
 
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 3em;
+    font-weight: normal;
+}
+
+h1 img{
+    width: 335px;
+}
 hr {
     display: block;
     height: 1px;
