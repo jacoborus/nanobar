@@ -128,5 +128,13 @@ var Nanobar = (function () {
 		}
 	};
 
+	Nanobar.prototype.increase = function (p) {
+		var w = p + this.bars[0].width;
+		w = (w > 100) ? 100 : (p + this.bars[0].width);
+
+		// expand bar
+		this.go( w );
+	};
+
 	return Nanobar;
 })();
