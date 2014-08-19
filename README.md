@@ -70,6 +70,15 @@ Resize the bar with `nanobar.go(percentage)`
 - `percentage` `<Number>` : percentage width of nanobar
 
 
+### Increase bar
+
+Increase the bar with `nanobar.increase(percentage)`
+
+**arguments**
+
+- `percentage` `<Number>` : percentage to increase the nanobar
+
+
 ## Example
 
 Create bar
@@ -87,6 +96,9 @@ var nanobar = new Nanobar( options );
 
 //move bar
 nanobar.go( 30 ); // size bar 30%
+
+//increase bar
+nanobar.increase( 10 ); // increase bar by 10%
 
 // Finish progress bar
 nanobar.go(100);
