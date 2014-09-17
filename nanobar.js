@@ -108,7 +108,7 @@ var Nanobar = (function () {
 			el.className = opts.className;
 		}
 		// set CSS position
-		el.style.position = !opts.target ? 'fixed' : opts.position || 'relative';
+		el.style.position = opts.position || !opts.target ? 'fixed' : 'relative';
 
 		// insert container
 		if (!opts.target) {
