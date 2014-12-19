@@ -1,6 +1,6 @@
 {
   "name": "nanobar",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Very lightweight js progress bars (for browsers)",
   "main": "index.js",
   "scripts": {
@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/jacoborus/nanobar/issues"
   },
-  "homepage": "http://nanobar.micronube.com"
+  "homepage": "http://nanobar.micronube.com",
+  "namespace": "Nanobar"
 }
