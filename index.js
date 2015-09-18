@@ -45,7 +45,7 @@
 		move = function () {
 			var self = this,
 				dist = this.width - this.here;
-	
+
 			if (dist < 0.1 && dist > -0.1) {
 				place.call( this, this.here );
 				this.moving = false;
@@ -134,12 +134,55 @@
 		Nanobar.prototype.go = function (p) {
 			// expand bar
 			this.bars[0].go( p );
-	
+
 			// create new bar at progress end
 			if (p == 100) {
 				init.call( this );
 			}
 		};
+
+		/**
+		 * Change the Nanobar color, accepts any valid CSS Color-String (rgb, rgba, hex, words ("red","green"))
+		 * @param  {String} color [The new Color]
+		 */
+		Nanobar.prototype.setColor = function(color) {
+			if(typeof color == 'string') {
+				this.bars[0].el.style['background-color'] = color;
+			}
+		}
+
+		/**
+		 * Change the Nanobar color to some predefined Colors
+		 * Available Colors:
+		 * 'success', 'info', 'warning', 'danger'
+		 * uses Bootstrap Color codes
+		 * More information : http://getbootstrap.com/css/#less-variables-colors
+		 *
+		 * @param  {String} state ['danger', 'success', 'info', 'warning']
+		 */
+		Nanobar.prototype.setState = function(state) {
+			var clr = null;
+			if(typeof state == 'string') {
+				switch(state.toLowerCase()) {
+					case 'success' :
+						clr = "#5cb85c";
+						break;
+					case 'info' :
+						clr = "#5bc0de";
+						break;
+					case 'warning' :
+						clr = "#f0ad4e";
+						break;
+					case 'danger':
+						clr = "#d9534f";
+						break;
+				}
+			}
+
+			if(clr) {
+				this.setColor(clr);
+			}
+		}
 
 		return Nanobar;
 	})();
