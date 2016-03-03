@@ -53,6 +53,7 @@
 					this.el.style.height = 0;
 					setTimeout( function () {
 						self.cont.el.removeChild( self.el );
+						self.cont.bars.splice( self.cont.bars.indexOf( self ), 1 );
 					}, 300);
 				}
 			} else {
