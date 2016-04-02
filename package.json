@@ -4,7 +4,8 @@
   "description": "Very lightweight js progress bars (for browsers)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint nanobar.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "url": "https://github.com/jacoborus/nanobar/issues"
   },
   "homepage": "http://nanobar.micronube.com",
-  "namespace": "Nanobar"
+  "namespace": "Nanobar",
+  "devDependencies": {
+    "eslint": "^2.6.0"
+  }
 }

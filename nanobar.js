@@ -1,151 +1,144 @@
 /* http://nanobar.micronube.com/  ||  https://github.com/jacoborus/nanobar/    MIT LICENSE */
 
 (function (root, factory) {
-	if (typeof exports === 'object') {
-		// CommonJS
-		factory(exports);
-	} else if (typeof define === 'function' && define.amd) {
-		// AMD. Register as an anonymous module.
-		define(['exports'], factory);
-	} else {
-		// Browser globals
-		factory(root);
-	}
-} (this, function(exports) {
-	exports.Nanobar = (function () {
+  if (typeof exports === 'object') {
+    // CommonJS
+    factory(exports)
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['exports'], factory)
+  } else {
+    // Browser globals
+    factory(root)
+  }
+}(this, function (exports) {
+  exports.Nanobar = (function () {
+    'use strict'
+    // container styles
+    var cssCont = {
+      width: '100%',
+      height: '4px',
+      zIndex: 9999,
+      top: '0'
+    }
+    // bar styles
+    var cssBar = {
+      width: 0,
+      height: '100%',
+      clear: 'both',
+      transition: 'height .3s'
+    }
 
-		'use strict';
-		var addCss, Bar, Nanobar, move, place, init,
-			// container styles
-			cssCont = {
-				width: '100%',
-				height: '4px',
-				zIndex: 9999,
-				top : '0'
-			},
-			// bar styles
-			cssBar = {
-				width:0,
-				height: '100%',
-				clear: 'both',
-				transition: 'height .3s'
-			};
+    // add `css` to `el` element
+    function addCss (el, css) {
+      var i
+      for (i in css) {
+        el.style[i] = css[i]
+      }
+      el.style.float = 'left'
+    }
 
+    // animation loop
+    function move () {
+      var self = this,
+          dist = this.width - this.here
 
-		// add `css` to `el` element
-		addCss = function (el, css ) {
-			var i;
-			for (i in css) {
-				el.style[i] = css[i];
-			}
-			el.style.float = 'left';
-		};
+      if (dist < 0.1 && dist > -0.1) {
+        place.call(this, this.here)
+        this.moving = false
+        if (this.width === 100) {
+          this.el.style.height = 0
+          setTimeout(function () {
+            self.cont.el.removeChild(self.el)
+            self.cont.bars.splice(self.cont.bars.indexOf(self), 1)
+          }, 300)
+        }
+      } else {
+        place.call(this, this.width - dist / 4)
+        setTimeout(function () {
+          self.go()
+        }, 16)
+      }
+    }
 
-		// animation loop
-		move = function () {
-			var self = this,
-				dist = this.width - this.here;
-	
-			if (dist < 0.1 && dist > -0.1) {
-				place.call( this, this.here );
-				this.moving = false;
-				if (this.width == 100) {
-					this.el.style.height = 0;
-					setTimeout( function () {
-						self.cont.el.removeChild( self.el );
-						self.cont.bars.splice( self.cont.bars.indexOf( self ), 1 );
-					}, 300);
-				}
-			} else {
-				place.call( this, this.width - (dist/4) );
-				setTimeout( function () {
-					self.go();
-				}, 16);
-			}
-		};
+    // set bar width
+    function place (num) {
+      this.width = num
+      this.el.style.width = this.width + '%'
+    }
 
-		// set bar width
-		place = function (num) {
-			this.width = num;
-			this.el.style.width = this.width + '%';
-		};
+    // create and insert bar in DOM and this.bars array
+    function init () {
+      var bar = new Bar(this)
+      this.bars.unshift(bar)
+    }
 
-		// create and insert bar in DOM and this.bars array
-		init = function () {
-			var bar = new Bar( this );
-			this.bars.unshift( bar );
-		};
+    function Bar (cont) {
+      // create progress element
+      this.el = document.createElement('div')
+      this.el.style.backgroundColor = cont.opts.bg
+      this.width = 0
+      this.here = 0
+      this.moving = false
+      this.cont = cont
+      addCss(this.el, cssBar)
+      cont.el.appendChild(this.el)
+    }
 
-		Bar = function ( cont ) {
-			// create progress element
-			this.el = document.createElement( 'div' );
-			this.el.style.backgroundColor = cont.opts.bg;
-			this.width = 0;
-			this.here = 0;
-			this.moving = false;
-			this.cont = cont;
-			addCss( this.el, cssBar);
-			cont.el.appendChild( this.el );
-		};
+    Bar.prototype.go = function (num) {
+      if (num) {
+        this.here = num
+        if (!this.moving) {
+          this.moving = true
+          move.call(this)
+        }
+      } else if (this.moving) {
+        move.call(this)
+      }
+    }
 
-		Bar.prototype.go = function (num) {
-			if (num) {
-				this.here = num;
-				if (!this.moving) {
-					this.moving = true;
-					move.call( this );
-				}
-			} else if (this.moving) {
-				move.call( this );
-			}
-		};
+    function Nanobar (opt) {
+      var opts = this.opts = opt || {},
+          el
 
+      // set options
+      opts.bg = opts.bg || '#000'
+      this.bars = []
 
-		Nanobar = function (opt) {
+      // create bar container
+      el = this.el = document.createElement('div')
+      if (opts.height && parseInt(opts.height, 10) > 0) {
+        cssCont.height = opts.height
+      }
+      // append style
+      addCss(this.el, cssCont)
+      if (opts.id) {
+        el.id = opts.id
+      }
+      // set CSS position
+      el.style.position = !opts.target ? 'fixed' : 'relative'
 
-			var opts = this.opts = opt || {},
-				el;
+      // insert container
+      if (!opts.target) {
+        document.getElementsByTagName('body')[0].appendChild(el)
+      } else {
+        opts.target.insertBefore(el, opts.target.firstChild)
+      }
 
-			// set options
-			opts.bg = opts.bg || '#000';
-			this.bars = [];
+      init.call(this)
+    }
 
+    Nanobar.prototype.go = function (p) {
+      // expand bar
+      this.bars[0].go(p)
 
-			// create bar container
-			el = this.el = document.createElement( 'div' );
-			if (opts.height && parseInt(opts.height) > 0) {
-				cssCont.height = opts.height;
-			}			
-			// append style
-			addCss( this.el, cssCont);
-			if (opts.id) {
-				el.id = opts.id;
-			}
-			// set CSS position
-			el.style.position = !opts.target ? 'fixed' : 'relative';
+      // create new bar at progress end
+      if (p === 100) {
+        init.call(this)
+      }
+    }
 
-			// insert container
-			if (!opts.target) {
-				document.getElementsByTagName( 'body' )[0].appendChild( el );
-			} else {
-				opts.target.insertBefore( el, opts.target.firstChild);
-			}
-
-			init.call( this );
-		};
-
-
-		Nanobar.prototype.go = function (p) {
-			// expand bar
-			this.bars[0].go( p );
-	
-			// create new bar at progress end
-			if (p == 100) {
-				init.call( this );
-			}
-		};
-
-		return Nanobar;
-	})();
-	return exports.Nanobar;
-}));
+    return Nanobar
+  })()
+  return exports.Nanobar
+}))
