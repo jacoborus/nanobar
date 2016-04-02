@@ -92,6 +92,20 @@ nanobar.go( 30 ); // size bar 30%
 nanobar.go(100);
 ```
 
+Change Nanobar Color
+```js
+
+nanobar.setColor('red'); // changes nanobar to red
+nanobar.setColor('#00ff00'); // changes nanobar to green
+nanobar.setColor('rgba(0,0,0,1)') // changes nanobar to black, 100% opacity
+
+// You can use any valid CSS Colorstring to change the nanobar color
+
+// Additional Helper function :
+nanobar.setState('danger') // uses Bootstrap color variable codes (success, info, warning, danger)
+
+```
+
 <br><br>
 
 ---
