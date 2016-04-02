@@ -113,6 +113,9 @@
 
 			// create bar container
 			el = this.el = document.createElement( 'div' );
+			if (opts.height && parseInt(opts.height) > 0) {
+				cssCont.height = opts.height;
+			}			
 			// append style
 			addCss( this.el, cssCont);
 			if (opts.id) {
