@@ -66,51 +66,52 @@
       bar.el.style.width = bar.width + '%'
     }
 
-    // create and insert bar in DOM and this.bars array
-    function init () {
-      var bar = new Bar(this)
-      this.bars.unshift(bar)
-    }
-
-    function Bar (cont) {
+    function createBar (cont) {
       // create progress element
-      this.el = document.createElement('div')
-      this.el.style.backgroundColor = cont.opts.bg
-      this.width = 0
-      this.here = 0
-      this.moving = false
-      this.cont = cont
-      addCss(this.el, cssBar)
-      cont.el.appendChild(this.el)
-    }
-
-    Bar.prototype.go = function (num) {
-      if (num) {
-        this.here = num
-        if (!this.moving) {
-          this.moving = true
-          move(this)
+      var el = document.createElement('div')
+      el.style.backgroundColor = cont.opts.bg
+      addCss(el, cssBar)
+      cont.el.appendChild(el)
+      var bar = {
+        el: el,
+        width: 0,
+        here: 0,
+        moving: false,
+        cont: cont,
+        go: function (num) {
+          if (num) {
+            bar.here = num
+            if (!bar.moving) {
+              bar.moving = true
+              move(bar)
+            }
+          } else if (bar.moving) {
+            move(bar)
+          }
         }
-      } else if (this.moving) {
-        move(this)
       }
+      return bar
     }
 
-    function Nanobar (opt) {
-      var opts = this.opts = opt || {},
-          el
+    // create and insert bar in DOM and bars array
+    function init (cont) {
+      var bar = createBar(cont)
+      cont.bars.unshift(bar)
+    }
 
+    function Nanobar (opts) {
+      opts || (opts = {})
       // set options
       opts.bg = opts.bg || '#000'
-      this.bars = []
+      var bars = [],
+          el = document.createElement('div')
 
       // create bar container
-      el = this.el = document.createElement('div')
       if (opts.height && parseInt(opts.height, 10) > 0) {
         cssCont.height = opts.height
       }
       // append style
-      addCss(this.el, cssCont)
+      addCss(el, cssCont)
       if (opts.id) {
         el.id = opts.id
       }
@@ -124,17 +125,21 @@
         opts.target.insertBefore(el, opts.target.firstChild)
       }
 
-      init.call(this)
-    }
-
-    Nanobar.prototype.go = function (p) {
-      // expand bar
-      this.bars[0].go(p)
-
-      // create new bar at progress end
-      if (p === 100) {
-        init.call(this)
+      var nanobar = {
+        el: el,
+        bars: bars,
+        opts: opts,
+        go: function (p) {
+          // expand bar
+          bars[0].go(p)
+          // create new bar at progress end
+          if (p === 100) {
+            init(nanobar)
+          }
+        }
       }
+      init(nanobar)
+      return nanobar
     }
 
     return Nanobar
