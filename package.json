@@ -1,8 +1,8 @@
 {
   "name": "nanobar",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Very lightweight js progress bars (for browsers)",
-  "main": "index.js",
+  "main": "nanobar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint nanobar.js"
