@@ -5,7 +5,8 @@
   "main": "nanobar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "linter": "eslint nanobar.js"
+    "linter": "eslint nanobar.js",
+    "build": "uglifyjs nanobar.js -o nanobar.min.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "homepage": "http://nanobar.micronube.com",
   "namespace": "Nanobar",
   "devDependencies": {
-    "eslint": "^2.6.0"
+    "eslint": "^2.6.0",
+    "uglify-js": "^2.6.2"
   }
 }
