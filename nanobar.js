@@ -39,32 +39,31 @@
     }
 
     // animation loop
-    function move () {
-      var self = this,
-          dist = this.width - this.here
+    function move (bar) {
+      var dist = bar.width - bar.here
 
       if (dist < 0.1 && dist > -0.1) {
-        place.call(this, this.here)
-        this.moving = false
-        if (this.width === 100) {
-          this.el.style.height = 0
+        place(bar, bar.here)
+        bar.moving = false
+        if (bar.width === 100) {
+          bar.el.style.height = 0
           setTimeout(function () {
-            self.cont.el.removeChild(self.el)
-            self.cont.bars.splice(self.cont.bars.indexOf(self), 1)
+            bar.cont.el.removeChild(bar.el)
+            bar.cont.bars.splice(bar.cont.bars.indexOf(bar), 1)
           }, 300)
         }
       } else {
-        place.call(this, this.width - dist / 4)
+        place(bar, bar.width - dist / 4)
         setTimeout(function () {
-          self.go()
+          bar.go()
         }, 16)
       }
     }
 
     // set bar width
-    function place (num) {
-      this.width = num
-      this.el.style.width = this.width + '%'
+    function place (bar, num) {
+      bar.width = num
+      bar.el.style.width = bar.width + '%'
     }
 
     // create and insert bar in DOM and this.bars array
@@ -90,10 +89,10 @@
         this.here = num
         if (!this.moving) {
           this.moving = true
-          move.call(this)
+          move(this)
         }
       } else if (this.moving) {
-        move.call(this)
+        move(this)
       }
     }
 
