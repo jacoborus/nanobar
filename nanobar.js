@@ -66,7 +66,7 @@
       moving: false,
       cont: cont,
       go: function (num) {
-        if (num) {
+        if (num >=0 ) {
           bar.here = num
           if (!bar.moving) {
             bar.moving = true
