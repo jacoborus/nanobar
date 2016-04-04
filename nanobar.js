@@ -2,130 +2,131 @@
 (function (root) {
   'use strict'
   // container styles
-  var cssCont = {
-    width: '100%',
-    height: '4px',
-    zIndex: 9999,
-    top: '0'
-  }
-  // bar styles
-  var cssBar = {
-    width: 0,
-    height: '100%',
-    clear: 'both',
-    transition: 'height .3s'
-  }
+  var css = '.nanobar{width:100%;height:4px;z-index:9999;top:0}.bar{width:0;height:100%;transition:height .3s;background:#000}'
 
-  // add `css` to `el` element
-  function addCss (el, css) {
-    var i
-    for (i in css) {
-      el.style[i] = css[i]
-    }
-    el.style.float = 'left'
-  }
+  // add required css in head div
+  function addCss () {
+    var s = document.getElementById('nanobarcss')
 
-  // animation loop
-  function move (bar) {
-    var dist = bar.width - bar.here
-
-    if (dist < 0.1 && dist > -0.1) {
-      place(bar, bar.here)
-      bar.moving = false
-      if (bar.width === 100) {
-        bar.el.style.height = 0
-        setTimeout(function () {
-          bar.cont.el.removeChild(bar.el)
-          bar.cont.bars.splice(bar.cont.bars.indexOf(bar), 1)
-        }, 300)
-      }
-    } else {
-      place(bar, bar.width - dist / 4)
-      setTimeout(function () {
-        bar.go()
-      }, 16)
+    // check whether style tag is already inserted
+    if (s === null) {
+      s = document.createElement('style')
+      s.type = 'text/css'
+      s.id = 'nanobarcss'
+      document.head.insertBefore(s, document.head.firstChild)
+      // the world
+      if (!s.styleSheet) return s.appendChild(document.createTextNode(css))
+      // IE
+      s.styleSheet.cssText = css
     }
   }
 
-  // set bar width
-  function place (bar, num) {
-    bar.width = num
-    bar.el.style.width = bar.width + '%'
+  function addClass (el, cls) {
+    if (el.classList) el.classList.add(cls)
+    else el.className += ' ' + cls
   }
 
-  function createBar (cont) {
+  // create a progress bar
+  // this will be destroyed after reaching 100% progress
+  function createBar (rm) {
     // create progress element
-    var el = document.createElement('div')
-    el.style.backgroundColor = cont.opts.bg
-    addCss(el, cssBar)
-    cont.el.appendChild(el)
-    var bar = {
-      el: el,
-      width: 0,
-      here: 0,
-      moving: false,
-      cont: cont,
-      go: function (num) {
-        if (num) {
-          bar.here = num
-          if (!bar.moving) {
-            bar.moving = true
-            move(bar)
-          }
-        } else if (bar.moving) {
-          move(bar)
+    var el = document.createElement('div'),
+        width = 0,
+        here = 0,
+        on = 0,
+        bar = {
+          el: el,
+          go: go
         }
+
+    addClass(el, 'bar')
+
+    // animation loop
+    function move () {
+      var dist = width - here
+
+      if (dist < 0.1 && dist > -0.1) {
+        place(here)
+        on = 0
+        if (width === 100) {
+          el.style.height = 0
+          setTimeout(function () {
+            rm(el)
+          }, 300)
+        }
+      } else {
+        place(width - dist / 4)
+        setTimeout(go, 16)
+      }
+    }
+
+    // set bar width
+    function place (num) {
+      width = num
+      el.style.width = width + '%'
+    }
+
+    function go (num) {
+      if (num >= 0) {
+        here = num
+        if (!on) {
+          on = 1
+          move()
+        }
+      } else if (on) {
+        move()
       }
     }
     return bar
   }
 
-  // create and insert bar in DOM and bars array
-  function init (cont) {
-    var bar = createBar(cont)
-    cont.bars.unshift(bar)
-  }
-
   function Nanobar (opts) {
     opts || (opts = {})
     // set options
-    opts.bg = opts.bg || '#000'
-    var bars = [],
-        el = document.createElement('div'),
+    var el = document.createElement('div'),
+        applyGo,
         nanobar = {
           el: el,
-          bars: bars,
-          opts: opts,
           go: function (p) {
             // expand bar
-            bars[0].go(p)
-            // create new bar at progress end
+            applyGo(p)
+            // create new bar when progress reaches 100%
             if (p === 100) {
-              init(nanobar)
+              init()
             }
           }
         }
 
-    // create bar container
-    if (opts.height && parseInt(opts.height, 10) > 0) {
-      cssCont.height = opts.height
+    // remove element from nanobar container
+    function rm (child) {
+      el.removeChild(child)
     }
-    // append style
-    addCss(el, cssCont)
-    if (opts.id) {
-      el.id = opts.id
+
+    // create and insert progress var in nanobar container
+    function init () {
+      var bar = createBar(rm)
+      el.appendChild(bar.el)
+      applyGo = bar.go
     }
-    // set CSS position
-    el.style.position = !opts.target ? 'fixed' : 'relative'
+
+    addCss()
+
+    addClass(el, 'nanobar')
+    if (opts.id) el.id = opts.id
+    if (opts.classname) addClass(el, opts.classname)
 
     // insert container
-    if (!opts.target) {
-      document.getElementsByTagName('body')[0].appendChild(el)
-    } else {
+    if (opts.target) {
+      // inside a div
+      el.style.position = 'relative'
       opts.target.insertBefore(el, opts.target.firstChild)
+    } else {
+      // on top of the page
+      el.style.position = 'fixed'
+      document.getElementsByTagName('body')[0].appendChild(el)
     }
 
-    init(nanobar)
+    init()
     return nanobar
   }
 
