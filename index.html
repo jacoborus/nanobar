@@ -26,7 +26,7 @@
 			<h1 id="nanobartitle">
 				<img src="https://raw.githubusercontent.com/jacoborus/nanobar/master/brand/nanobar.png" alt="nanobar logo">
 			</h1>
-			<p class="center">Very very lightweight progress bars<br/><br/>(699 gzipped bytes of vanilla js)</p>
+			<p class="center">Very lightweight progress bars. (699 gzipped bytes of vanilla js)</p>
 			<p class="center"><small>For iE7+ and the rest of the world</small></p>
 
 			<div class="general-buttons">
@@ -43,25 +43,22 @@
 			<br>
 			<h2>Example</h2>
 			<pre class="full"><code>var options = {
-	bg: '#acf',
-
-	// leave target blank for global nanobar
-	target: document.getElementById('myDivId'),
-
-	// id for new nanobar
-	id: 'mynano'
+    classname: 'my-class',
+  id: 'my-id',
+    target: document.getElementById('myDivId')
 };
 
 var nanobar = new Nanobar( options );
 
-// move bar
+//move bar
 nanobar.go( 30 ); // size bar 30%
+nanobar.go( 76 ); // size bar 76%
 
-// Finish progress bar
+// size bar 100% and and finish
 nanobar.go(100);</code></pre>
 			<h2 id="installation">Installation</h2>
 
-			<p>Download and extract the last release from <a href="https://github.com/jacoborus/nanobar/archive/master.zip">here</a> or install with package manager:</p>
+			<p>Download and extract the <a href="https://github.com/jacoborus/nanobar/archive/master.zip">latest release</a> or install with package manager:</p>
 
 			<p><a href="http://bower.io/">Bower</a>:</p>
 
