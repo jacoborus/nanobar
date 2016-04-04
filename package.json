@@ -1,0 +1,24 @@
+{
+  "name": "nanobar-website",
+  "version": "1.0.0",
+  "description": "nanobar website",
+  "main": "index.js",
+  "dependencies": {
+    "nanobar": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cp -f node_modules/nanobar/nanobar.min.js js/nanobar.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacoborus/nanobar.git"
+  },
+  "author": "Jacobo Tabernero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacoborus/nanobar/issues"
+  },
+  "homepage": "https://github.com/jacoborus/nanobar#readme"
+}
