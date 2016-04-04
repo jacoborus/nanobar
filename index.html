@@ -43,14 +43,14 @@
 			<br>
 			<h2>Example</h2>
 			<pre class="full"><code>var options = {
-    classname: 'my-class',
+  classname: 'my-class',
   id: 'my-id',
-    target: document.getElementById('myDivId')
+  target: document.getElementById('myDivId')
 };
 
 var nanobar = new Nanobar( options );
 
-//move bar
+// move bar
 nanobar.go( 30 ); // size bar 30%
 nanobar.go( 76 ); // size bar 76%
 
@@ -74,7 +74,7 @@ nanobar.go(100);</code></pre>
 
 			<pre><code>&lt;script src="path/to/nanobar.js"&gt;&lt;/script&gt;</code></pre>
 
-			<p>or require it with <a href="http://browserify.org/">Browserify</a>:</p>
+			<p>or require it:</p>
 
 			<pre><code>var Nanobar = require('path/to/nanobar')</code></pre>
 
@@ -85,9 +85,9 @@ nanobar.go(100);</code></pre>
 			<p><strong>options</strong></p>
 
 			<ul>
-			<li><code>bg</code> <code>&lt;String&gt;</code>: background css property, ‘#000’ by default</li>
-			<li><code>id</code> <code>&lt;String&gt;</code>: id for <strong>nanobar</strong> div</li>
-			<li><code>target</code> <code>&lt;DOM Element&gt;</code>: (optional) Where to put the progress bar, <strong>nanobar</strong> will be fixed to top of document if <code>target</code> is <code>null</code></li>
+        <li><code>id</code> <code>&lt;String&gt;</code>: id for <strong>nanobar</strong> div container</li>
+        <li><code>classname</code> <code>&lt;String&gt;</code>: classname for <strong>nanobar</strong> div container</li>
+        <li><code>target</code> <code>&lt;DOM Element&gt;</code>: optional) Where to put the progress bar, nanobar will be fixed to top of document if no target is passed</li>
 			</ul>
 
 			<h3 id="move-bar">Move bar</h3>
@@ -97,7 +97,7 @@ nanobar.go(100);</code></pre>
 			<p><strong>arguments</strong></p>
 
 			<ul>
-			<li><code>percentage</code> <code>&lt;Number&gt;</code> : percentage width of nanobar</li>
+			<li><code>percentage</code> <code>&lt;Number&gt;</code> : percentage of progress</li>
 			</ul>
 
 
@@ -105,7 +105,7 @@ nanobar.go(100);</code></pre>
 
 			<hr>
 
-			<p>© 2014 <a href="https://github.com/jacoborus">jacoborus</a> - <a href="https://raw.github.com/jacoborus/nanobar/master/LICENSE">MIT License</a></p>
+			<p>© 2016 <a href="https://github.com/jacoborus">jacoborus</a> - <a href="https://raw.github.com/jacoborus/nanobar/master/LICENSE">MIT License</a></p>
 		</div>
 
 		<script src="js/nanobar.min.js"></script>
