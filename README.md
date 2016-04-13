@@ -5,7 +5,7 @@ Very lightweight progress bars (~699 bytes gzipped).
 
 Compatibility: iE7+ and the rest of the world
 
-[![npm version](https://badge.fury.io/js/nanobar.svg)](https://www.npmjs.com/package/nanobar) [![Bower version](https://badge.fury.io/bo/nanobar.svg)](https://github.com/jacoborus/nanobar/releases)
+[![npm version](https://badge.fury.io/js/nanobar.svg)](https://www.npmjs.com/package/nanobar) [![Bower version](https://img.shields.io/bower/v/nanobar.svg?maxAge=2592000)](https://github.com/jacoborus/nanobar/releases)
 
 ## Demo
 
