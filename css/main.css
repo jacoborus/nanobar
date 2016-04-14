@@ -187,12 +187,11 @@ li {
   background: #38f;
   border-radius: 4px;
   box-shadow: 0 0 10px #59d;
-  height: 6px;
   margin: 0 auto;
 }
 #centered .nanobar .bar {
   background: url('../img/rainbow.gif') 100%;
-  height: 9px;
+  height: 2px;
 }
 
 /* ==========================================================================
