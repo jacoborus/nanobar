@@ -13,10 +13,6 @@
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="shortcut icon" href="nanobar.ico?v=2" />
 		<style>
-      .nanobar .bar {
-        border-radius: 3px;
-        box-shadow: 0px 0px 9px #666;
-      }
     </style>
 
 		<!--[if lt IE 9]>
@@ -47,6 +43,19 @@
 				<iframe src="http://ghbtns.com/github-btn.html?user=jacoborus&repo=nanobar&type=fork&count=true&size=large" height="30" width="140" frameborder="0" scrolling="0" style="width:140px; height: 30px;" allowTransparency="true"></iframe>
 			</div>
 			<br>
+
+      <h3>Customizable with CSS</h3>
+      <section id="color">
+        <button class="doc_go" onClick="colorbar.go(30)">bar.go(30)</button>
+        <button class="doc_go" onClick="colorbar.go(60)">bar.go(60)</button>
+        <button class="doc_go" onClick="colorbar.go(100)">bar.go(100)</button>
+      </section>
+      <section id="centered">
+        <button class="doc_go" onClick="centeredbar.go(30)">bar.go(30)</button>
+        <button class="doc_go" onClick="centeredbar.go(60)">bar.go(60)</button>
+        <button class="doc_go" onClick="centeredbar.go(100)">bar.go(100)</button>
+      </section>
+
 			<h2>Example</h2>
 			<pre class="full"><code>var options = {
   classname: 'my-class',
@@ -118,6 +127,10 @@ nanobar.go(100);</code></pre>
 		<script>
 			var nanobar = new Nanobar();
 			nanobar.go(50);
+      var colorbar = new Nanobar({target: document.getElementById('color')});
+      colorbar.go(20);
+      var centeredbar = new Nanobar({target: document.getElementById('centered')});
+      centeredbar.go(10);
 		</script>
 		<script type="text/javascript">
 			var _gaq = _gaq || [];

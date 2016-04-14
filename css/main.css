@@ -97,20 +97,21 @@ p.center {
 
 
 .container {
-    max-width: 800px;
+    max-width: 75em;
     margin: 0 auto;
     padding: 0 2em;
 }
 h1 {
     text-align: center;
     font-size: 3em;
-    margin-top: 3em;
+    margin-top: 2em;
     font-weight: normal;
 }
 h2 {
     margin-top: 4em;
 }
 h3 {
+    text-align: center;
     margin-top: 2em;
 }
 .general-buttons{
@@ -163,6 +164,35 @@ li {
 .github {
     width:300px;
     margin: 0 auto;
+}
+
+
+#color, #centered {
+  padding: 1em;
+  float: left;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 4em;
+}
+@media (min-width: 60em) {
+  #color, #centered {
+    width: 50%;
+  }
+}
+#color .nanobar, #centered .nanobar {
+  margin-bottom: 2em;
+}
+
+#color .nanobar .bar {
+  background: #38f;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #59d;
+  height: 6px;
+  margin: 0 auto;
+}
+#centered .nanobar .bar {
+  background: url('../img/rainbow.gif') 100%;
+  height: 9px;
 }
 
 /* ==========================================================================
