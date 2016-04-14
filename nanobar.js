@@ -81,7 +81,7 @@
   }
 
   function Nanobar (opts) {
-    opts || (opts = {})
+    opts = opts || {}
     // set options
     var el = document.createElement('div'),
         applyGo,

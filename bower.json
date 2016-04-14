@@ -1,12 +1,12 @@
 {
   "name": "nanobar",
   "description": "Very lightweight js progress bars",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "nanobar.js",
   "keywords": [
     "loader",
     "progress",
-    "progressbar",
+    "progress bar",
     "CSS3",
     "html"
   ],
@@ -14,6 +14,7 @@
     "Jacobo Tabernero jacobo@xarope.eu"
   ],
   "license": "MIT",
+  "homepage": "http://nanobar.jacoborus.codes",
   "bugs": {
     "url": "https://github.com/jacoborus/nanobar/issues"
   },

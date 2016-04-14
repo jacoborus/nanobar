@@ -88,6 +88,30 @@ nanobar.go( 76 ); // size bar 76%
 nanobar.go(100);
 ```
 
+### Customize bars
+
+Nanobar injects a style tag in your HTML head. Bar divs has class `.bar`, and its containers `.nanobar`, so you can overwrite its values.
+
+Default css:
+
+```css
+.nanobar {
+  width: 100%;
+  height: 4px;
+  z-index: 9999;
+  top:0
+}
+.bar {
+  width: 0;
+  height: 100%;
+  transition: height .3s;
+  background:#000;
+}
+```
+
+You should know what to do with that ;)
+
+
 <br><br>
 
 ---

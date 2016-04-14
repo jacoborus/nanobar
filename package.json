@@ -1,6 +1,6 @@
 {
   "name": "nanobar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Very lightweight js progress bars (for browsers)",
   "main": "nanobar.js",
   "scripts": {
@@ -13,7 +13,8 @@
     "url": "git@github.com:jacoborus/nanobar.git"
   },
   "keywords": [
-    "progressbar",
+    "loader",
+    "progress bar",
     "css3",
     "js",
     "html"
@@ -23,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/jacoborus/nanobar/issues"
   },
-  "homepage": "http://nanobar.micronube.com",
+  "homepage": "http://nanobar.jacoborus.codes",
   "namespace": "Nanobar",
   "devDependencies": {
     "eslint": "^2.6.0",
