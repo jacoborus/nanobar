@@ -1,7 +1,7 @@
 {
   "name": "nanobar",
   "description": "Very lightweight js progress bars",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "nanobar.js",
   "keywords": [
     "loader",

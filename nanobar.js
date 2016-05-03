@@ -135,7 +135,7 @@
     module.exports = Nanobar
   } else if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define([], Nanobar)
+    define([], function () { return Nanobar })
   } else {
     // Browser globals
     root.Nanobar = Nanobar
