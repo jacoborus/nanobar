@@ -1,4 +1,4 @@
-![nanobar](https://raw.githubusercontent.com/jacoborus/nanobar/master/brand/nanobar.png 'nanobar logo')
+![nanobar](brand/nanobar.png 'nanobar logo')
 =======================================================================================================
 
 Very lightweight progress bars (~699 bytes gzipped).
