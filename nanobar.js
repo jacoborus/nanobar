@@ -1,25 +1,6 @@
 /* http://nanobar.micronube.com/  ||  https://github.com/jacoborus/nanobar/    MIT LICENSE */
 (function (root) {
   'use strict'
-  // container styles
-  var css = '.nanobar{width:100%;height:4px;z-index:9999;top:0}.bar{width:0;height:100%;transition:height .3s;background:#000}'
-
-  // add required css in head div
-  function addCss () {
-    var s = document.getElementById('nanobarcss')
-
-    // check whether style tag is already inserted
-    if (s === null) {
-      s = document.createElement('style')
-      s.type = 'text/css'
-      s.id = 'nanobarcss'
-      document.head.insertBefore(s, document.head.firstChild)
-      // the world
-      if (!s.styleSheet) return s.appendChild(document.createTextNode(css))
-      // IE
-      s.styleSheet.cssText = css
-    }
-  }
 
   function addClass (el, cls) {
     if (el.classList) el.classList.add(cls)
@@ -108,8 +89,6 @@
       el.appendChild(bar.el)
       applyGo = bar.go
     }
-
-    addCss()
 
     addClass(el, 'nanobar')
     if (opts.id) el.id = opts.id
