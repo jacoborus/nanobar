@@ -1,0 +1,12 @@
+.nanobar {
+  height: 4px;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.nanobar .bar {
+  background: #000;
+  height: 100%;
+  transition: height .3s;
+}
