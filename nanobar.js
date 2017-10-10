@@ -31,15 +31,22 @@
   function createBar (rm) {
     // create progress element
     var el = document.createElement('div'),
+        interval,
         width = 0,
         here = 0,
         on = 0,
         bar = {
           el: el,
-          go: go
+          go: go,
+          start: start,
+          stop: stop
         }
 
     addClass(el, 'bar')
+
+    function getNewRandomWidth () {
+      return here + Math.round(Math.random() * 10)
+    }
 
     // animation loop
     function move () {
@@ -77,6 +84,33 @@
         move()
       }
     }
+
+    function start (done) {
+      clearInterval(interval)
+
+      interval = setInterval(function () {
+        if (here >= 100) {
+          clearInterval(interval)
+
+          done()
+        } else {
+          var newWidth = getNewRandomWidth()
+
+          if (newWidth >= 100) {
+            go(100)
+          } else {
+            go(newWidth)
+          }
+        }
+      }, 500)
+
+      go(getNewRandomWidth())
+    }
+
+    function stop () {
+      clearInterval(interval)
+    }
+
     return bar
   }
 
@@ -84,12 +118,23 @@
     opts = opts || {}
     // set options
     var el = document.createElement('div'),
-        applyGo,
+        bar,
         nanobar = {
           el: el,
+          start: function () {
+            bar.start(function () {
+              init()
+            })
+          },
+          stop: function () {
+            bar.stop()
+          },
+          finish: function () {
+            nanobar.go(100)
+          },
           go: function (p) {
             // expand bar
-            applyGo(p)
+            bar.go(p)
             // create new bar when progress reaches 100%
             if (p >= 100) {
               init()
@@ -104,9 +149,8 @@
 
     // create and insert progress var in nanobar container
     function init () {
-      var bar = createBar(rm)
+      bar = createBar(rm)
       el.appendChild(bar.el)
-      applyGo = bar.go
     }
 
     addCss()
