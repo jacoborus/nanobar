@@ -1,7 +1,7 @@
 ![nanobar](https://raw.githubusercontent.com/jacoborus/nanobar/master/brand/nanobar.png 'nanobar logo')
 =======================================================================================================
 
-Very lightweight progress bars (~699 bytes gzipped).
+Very lightweight progress bars (~930 bytes gzipped).
 
 Compatibility: iE7+ and the rest of the world
 
@@ -56,6 +56,7 @@ var nanobar = new Nanobar( options );
 - `id` `<String>`: (optional) id for **nanobar** div
 - `classname` `<String>`: (optional) class for **nanobar** div
 - `target` `<DOM Element>`: (optional) Where to put the progress bar, **nanobar** will be fixed to top of document if no `target` is passed
+- `autoRun` `<Boolean>`: (optional) if `true` **nanobar** will automatically fill (never reaching 100) until `nanobar.go(100)` is called
 
 
 ### Move bar

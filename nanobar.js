@@ -28,12 +28,13 @@
 
   // create a progress bar
   // this will be destroyed after reaching 100% progress
-  function createBar (rm) {
+  function createBar (rm, autoRun) {
     // create progress element
     var el = document.createElement('div'),
         width = 0,
         here = 0,
         on = 0,
+        autoRunId = null,
         bar = {
           el: el,
           go: go
@@ -77,6 +78,21 @@
         move()
       }
     }
+    
+    function periodic () {
+      // exit if progress has surpassed 100
+      if (here >= 100) {
+        clearInterval(autoRunId)
+        autoRunId = null
+        return
+      }
+      go(here + ((.05 * Math.pow(1-Math.sqrt(here / 100), 2)) * 100))
+    }
+    
+    // automatically increment bar (never reaching 100%) if autoRun is `true`
+    if (autoRun) {
+      autoRunId = setInterval(periodic, 16)
+    }
     return bar
   }
 
@@ -103,8 +119,8 @@
     }
 
     // create and insert progress var in nanobar container
-    function init () {
-      var bar = createBar(rm)
+    function init (autoRun) {
+      var bar = createBar(rm, autoRun)
       el.appendChild(bar.el)
       applyGo = bar.go
     }
@@ -126,7 +142,7 @@
       document.getElementsByTagName('body')[0].appendChild(el)
     }
 
-    init()
+    init(opts.autoRun)
     return nanobar
   }
 
