@@ -27,7 +27,7 @@
   "homepage": "http://nanobar.jacoborus.codes",
   "namespace": "Nanobar",
   "devDependencies": {
-    "eslint": "^2.6.0",
-    "uglify-js": "^2.6.2"
+    "eslint": "^4.12.1",
+    "uglify-js": "^3.2.1"
   }
 }
